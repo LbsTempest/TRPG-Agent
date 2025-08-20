@@ -1,0 +1,3 @@
+Agent:
+  base_url: https://api.deepseek.com
+  api_key: sk-xxxxxxxxxxxx
