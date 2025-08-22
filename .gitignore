@@ -11,3 +11,4 @@ wheels/
 config/*
 !config/example_config.yaml
 test*
+.vscode
