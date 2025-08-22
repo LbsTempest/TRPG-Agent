@@ -1,13 +1,23 @@
 import asyncio
 
-from agents import Agent, Runner, set_default_openai_client, set_default_openai_api, set_tracing_disabled, function_tool
+from agents import (
+    Agent,
+    Runner,
+    set_default_openai_client,
+    set_default_openai_api,
+    set_tracing_disabled,
+    function_tool,
+)
 from openai import AsyncOpenAI
 
 
+from utils import GeneralConfig
+
+general_config = GeneralConfig.load_from_yaml("configs/general_configs/agent_config.yaml")
+
 # 创建DeepSeek客户端
 client = AsyncOpenAI(
-    api_key="sk-xxxxxxxxxx", 
-    base_url="https://api.deepseek.com"
+    api_key=general_config.Agent.api_key, base_url="https://api.deepseek.com"
 )
 
 set_default_openai_client(client)
@@ -27,16 +37,21 @@ def get_poem_writer(poem: str) -> str:
 
 # 创建Agent时传入自定义客户端
 agent = Agent(
-    name="DeepSeek Assistant", 
+    name="DeepSeek Assistant",
     instructions="你是一个专业陪聊，如果用户日常聊天，则正常回应，如果用户提问某些领域知识，你需要查看工具中有没有适合回复的函数，并调用",
     model="deepseek-chat",
     tools=[get_poem_writer],
 )
 
-# 使用示例
-if __name__ == "__main__":
-    result = Runner.run_sync(
-        agent, 
-        "我想知道'大鹏展翅九万里''时而伏卧时而起''床前地上一片霜'这三句诗的作者分别是谁"
+
+async def main():
+    result = await Runner.run(
+        agent,
+        "我想知道'大鹏展翅九万里''时而伏卧时而起''床前地上一片霜'这三句诗的作者分别是谁，请使用工具get_poem_writer查询",
     )
     print(result.final_output)
+
+
+# 使用示例
+if __name__ == "__main__":
+    asyncio.run(main())
