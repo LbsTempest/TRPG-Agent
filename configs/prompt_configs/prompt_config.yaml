@@ -1,0 +1,14 @@
+system_prompt: "你是一个ai..."
+
+planning_prompt:
+  initial_plan: "请制订计划... 1... 2..."
+  update_plan_pre_messages: "基于之前的结果执行计划..."
+  update_plan_post_messages: "根据新信息执行新计划..."
+
+managed_agent_prompt:
+  task: "子任务..."
+  report: "请提供你的执行结果..."
+
+final_answer_prompt:
+  pre_messages: "整理信息..."
+  post_messages: "确保答案完整准确用户友好..."
