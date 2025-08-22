@@ -6,7 +6,7 @@ from openai import OpenAI
 from utils import AgentConfig
 
 config = AgentConfig()
-config.load_config("config/agent_config.yaml")
+config.load_config("configs/general_configs/agent_config.yaml")
 
 # 创建DeepSeek客户端
 client = OpenAI(
