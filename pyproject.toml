@@ -5,9 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "atomic-agents>=2.0.4",
+    "langchain>=0.3.27",
+    "langchain-deepseek>=0.1.4",
+    "langgraph>=0.6.6",
     "openai>=1.100.2",
-    "openai-agents>=0.2.8",
     "ruamel-yaml>=0.18.15",
-    "smolagents[toolkit]>=1.21.2",
 ]
